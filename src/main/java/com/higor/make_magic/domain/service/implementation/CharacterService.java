@@ -53,7 +53,7 @@ public class CharacterService implements CharacterServiceDefinition {
     public Character update(Long id, CharacterDTO characterDTO) {
         try{
             Character character = this.getById(id);
-            characterDTO.setHouse(this.getHouseId(character.getHouse()));
+            characterDTO.setHouse(this.getHouseId(characterDTO.getHouse()));
             character.updateData(characterDTO);
             return this.repository.save(character);
         }catch(EntityNotFoundException ex) {
