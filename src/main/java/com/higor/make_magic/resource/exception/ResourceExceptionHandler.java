@@ -16,8 +16,6 @@ import java.time.Instant;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-    private HttpStatus statusCode;
-
     public StandardError standardErrorFactory(Instant date, String path){
         return new StandardError(path, date);
     }

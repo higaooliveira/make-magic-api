@@ -1,7 +1,5 @@
 package com.higor.make_magic.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.io.Serializable;
 
 public class HouseDTO implements Serializable {

@@ -21,11 +21,11 @@ public class CharacterSpecification implements Specification<Character> {
     public Predicate toPredicate(Root<Character> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         Predicate predicate = criteriaBuilder.conjunction();
 
-        if(this.filter.getHouse() != null){
+        if(this.filter.getHouse() != null && !this.filter.getHouse().isEmpty()){
             predicate.getExpressions().add(criteriaBuilder.equal(root.get("house"), this.filter.getHouse()));
         }
 
-        if (this.filter.getPatronus() != null){
+        if (this.filter.getPatronus() != null && !this.filter.getHouse().isEmpty()){
             predicate.getExpressions().add(criteriaBuilder.equal(root.get("patronus"), this.filter.getPatronus()));
         }
 

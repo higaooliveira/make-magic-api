@@ -3,19 +3,16 @@ package com.higor.make_magic.domain.service.implementation;
 import com.higor.make_magic.domain.dto.HouseDTO;
 import com.higor.make_magic.domain.service.definition.PotterApiServiceDefinition;
 import com.higor.make_magic.domain.service.definition.RestClientDefinition;
-import com.higor.make_magic.domain.service.exception.ResourceNotFoundException;
 import com.higor.make_magic.domain.service.exception.ThirdPartyApiException;
 import okhttp3.OkHttpClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
-import retrofit2.HttpException;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import java.io.IOException;
-import java.util.Arrays;
+
 import java.util.List;
 
 @Service

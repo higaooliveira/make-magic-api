@@ -3,12 +3,12 @@ package com.higor.make_magic.resource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.higor.make_magic.domain.dto.CharacterDTO;
 import com.higor.make_magic.domain.entity.Character;
-import com.higor.make_magic.domain.service.implementation.CharacterService;
-import com.higor.make_magic.resource.CharacterResource;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -18,6 +18,7 @@ import java.util.List;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestPropertySource(locations="classpath:test.properties")
 public class CharacterResourceTests {
 
     @Autowired
@@ -29,9 +30,13 @@ public class CharacterResourceTests {
     @Autowired
     private CharacterResource characterResource;
 
+    @BeforeEach
+    public void setUp() throws Exception {
+        this.case03();
+    }
 
     @Test
-    public void testGetCharacterList() throws Exception{
+    public void case01() throws Exception{
         List<Character> expectedReturnList = new ArrayList<>();
         this.mockMvc.perform(
                 MockMvcRequestBuilders.get("/api/characters")
@@ -42,7 +47,7 @@ public class CharacterResourceTests {
     }
 
     @Test
-    public void testGetCharacterById() throws Exception {
+    public void case02() throws Exception {
         Character expectedReturn = new Character();
         Long id = 1L;
         this.mockMvc.perform(
@@ -54,7 +59,7 @@ public class CharacterResourceTests {
     }
 
     @Test
-    public void testCreateCharacter() throws Exception{
+    public void case03() throws Exception{
         CharacterDTO mockData = new CharacterDTO();
         mockData.setName("Mock Teste");
         mockData.setRole("student");
@@ -70,7 +75,7 @@ public class CharacterResourceTests {
     }
 
     @Test
-    public void testeUpdateCharacter() throws Exception {
+    public void case04() throws Exception {
         CharacterDTO mockData = new CharacterDTO();
         mockData.setName("Atualização Mock Teste");
         mockData.setRole("student");
@@ -83,5 +88,14 @@ public class CharacterResourceTests {
                         .put("/api/characters/1")
                         .contentType("application/json").content(objectMapper.writeValueAsString(mockData))
         ).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void case05() throws Exception {
+        this.mockMvc.perform(
+                MockMvcRequestBuilders
+                        .delete("/api/characters/1")
+                        .contentType("application/json")
+        ).andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 }

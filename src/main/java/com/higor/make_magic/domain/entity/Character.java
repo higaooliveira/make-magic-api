@@ -63,7 +63,7 @@ public class Character implements Serializable {
     public String getName() {return this.name;}
 
     public void setName(String name) {
-        if(name != null && !name.isEmpty() && !name.isBlank()){
+        if(name != null && !name.isEmpty()){
             this.name = name;
         }
     }
@@ -71,7 +71,7 @@ public class Character implements Serializable {
     public String getRole() {return this.role;}
 
     public void setRole(String role) {
-        if(role != null && !role.isEmpty() && !role.isBlank()){
+        if(role != null && !role.isEmpty()){
             this.role = role;
         }
     }
@@ -79,7 +79,7 @@ public class Character implements Serializable {
     public String getSchool() {return this.school;}
 
     public void setSchool(String school) {
-        if(school != null && !school.isEmpty() && !school.isBlank()){
+        if(school != null && !school.isEmpty()){
             this.school = school;
         }
     }
@@ -87,7 +87,7 @@ public class Character implements Serializable {
     public String getHouse() {return this.house;}
 
     public void setHouse(String house) {
-        if (house != null && !house.isEmpty() && !house.isBlank()){
+        if (house != null && !house.isEmpty()){
             this.house = house;
         }
     }
@@ -95,7 +95,7 @@ public class Character implements Serializable {
     public String getPatronus() {return this.patronus;}
 
     public void setPatronus(String patronus) {
-        if(patronus != null && !patronus.isEmpty() && !patronus.isBlank()){
+        if(patronus != null && !patronus.isEmpty()){
             this.patronus = patronus;
         }
     }
