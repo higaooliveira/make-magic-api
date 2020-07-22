@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.Instant;
 import java.util.HashSet;
 
+/**
+ * This class represents the returned standard Structure in Exception case
+ */
 public class StandardError {
 
     private HashSet<String> messages = new HashSet();

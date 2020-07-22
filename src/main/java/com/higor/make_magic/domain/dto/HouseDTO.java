@@ -2,6 +2,9 @@ package com.higor.make_magic.domain.dto;
 
 import java.io.Serializable;
 
+/**
+ * This class is a mapping from PotterApi Response
+ */
 public class HouseDTO implements Serializable {
 
     private static final Long serialVersionUID = 1L;

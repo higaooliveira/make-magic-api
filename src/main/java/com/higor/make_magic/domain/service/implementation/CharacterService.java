@@ -28,6 +28,13 @@ public class CharacterService implements CharacterServiceDefinition {
     @Autowired
     private PotterApiService apiService;
 
+    /**
+     *
+     * @param house The house hash code to filter all characters by house (Can be null)
+     * @param patronus The patronus name to filter all characters by patronus (Can be null)
+     * @variable specification is an object that represents the filter in query
+     * @return List of Characters
+     */
     @Override
     public List<Character> getAll(String house, String patronus) {
         Character filter  = new Character(house, patronus);
@@ -35,12 +42,22 @@ public class CharacterService implements CharacterServiceDefinition {
         return this.repository.findAll(specification);
     }
 
+    /**
+     *
+     * @param id The character id to get a character by id
+     * @return Character
+     */
     @Override
     public Character getById(Long id) {
         Optional<Character> character = this.repository.findById(id);
         return character.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
+    /**
+     *
+     * @param characterDTO Data transfer object to create a Character
+     * @return Created Character
+     */
     @Override
     public Character create(CharacterDTO characterDTO) {
         Character character = characterDTO.toEntity();
@@ -49,6 +66,12 @@ public class CharacterService implements CharacterServiceDefinition {
         return character;
     }
 
+    /**
+     *
+     * @param id The character id to update
+     * @param characterDTO Data transfer object to update a Character
+     * @return Updated Character
+     */
     @Override
     public Character update(Long id, CharacterDTO characterDTO) {
         try{
@@ -61,6 +84,11 @@ public class CharacterService implements CharacterServiceDefinition {
         }
     }
 
+    /**
+     *
+     * @param id to delete
+     * @return No content
+     */
     @Override
     public void delete(Long id) {
         try {
@@ -70,14 +98,18 @@ public class CharacterService implements CharacterServiceDefinition {
         }
     }
 
+    /**
+     *
+     * @param name The house name to match the returned data from API and get your id
+     * @return HouseDTO
+     */
     public String getHouseId(String name){
-        List<HouseDTO> house = this.apiService.getAllHouses().stream().filter(
-           it-> it.getName().toLowerCase().equals(name.toLowerCase())
-        ).collect(Collectors.toList());
+        return this.apiService.getAllHouses()
+                .stream()
+                .filter(it -> it.getName().toLowerCase().equals(name.toLowerCase()))
+                .findFirst()
+                .map(HouseDTO::getId)
+                .orElseThrow(() -> new InvalidHouseException("You must be pass a valid house !"));
 
-        if (house.isEmpty()){
-            throw new InvalidHouseException("You must be pass a valid house !");
-        }
-        return house.get(0).getId();
     }
 }

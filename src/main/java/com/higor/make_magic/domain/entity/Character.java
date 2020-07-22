@@ -18,7 +18,6 @@ public class Character implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @NotNull(message = "Character name must be passed")
     @NotEmpty(message = "Character name must be passed")
     @NotBlank(message = "Character name must be passed")

@@ -17,6 +17,9 @@ public class CharacterSpecification implements Specification<Character> {
         this.filter = filter;
     }
 
+    /**
+     * This method create a filter to database query with the query strings parameters sent in request
+     */
     @Override
     public Predicate toPredicate(Root<Character> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         Predicate predicate = criteriaBuilder.conjunction();

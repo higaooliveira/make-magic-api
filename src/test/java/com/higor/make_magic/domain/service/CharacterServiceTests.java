@@ -27,16 +27,30 @@ public class CharacterServiceTests {
     public void setUp () throws Exception {
         this.case05();
     }
+
+    /**
+     * Check if GetAll method return a Not null object
+     * @throws Exception
+     */
     @Test
     public void case01() throws Exception {
         Assert.assertNotNull(characterService.getAll("", ""));
     }
 
+    /**
+     * Check if GetAll with filters method return a Not null object
+     * @throws Exception
+     */
     @Test()
     public void case02() throws Exception {
         Assert.assertNotNull(characterService.getAll("5a05e2b252f721a3cf2ea33f", "stag"));
     }
 
+    /**
+     * Test get Character by Invalid ID
+     * Test Exception
+     * @throws Exception
+     */
     @Test
     public void case03() throws Exception {
         try {
@@ -46,11 +60,19 @@ public class CharacterServiceTests {
         }
     }
 
+    /**
+     * Test get Character by Valid ID
+     * @throws Exception
+     */
     @Test
     public void case04() throws Exception {
         Assert.assertNotNull(characterService.getById(1L));
     }
 
+    /**
+     * Test create a Character
+     * @throws Exception
+     */
     @Test
     public void case05() throws Exception {
         CharacterDTO characterDTO = new CharacterDTO();
@@ -64,6 +86,10 @@ public class CharacterServiceTests {
         Assert.assertTrue(characterService.create(characterDTO) instanceof Character);
     }
 
+    /**
+     * Test create an invalid Character
+     * @throws Exception
+     */
     @Test
     public void case06() throws Exception {
         try {
@@ -79,6 +105,10 @@ public class CharacterServiceTests {
         }
     }
 
+    /**
+     * Test create an invalid Character
+     * @throws Exception
+     */
     @Test
     public void case07() throws Exception {
         try {
@@ -89,6 +119,10 @@ public class CharacterServiceTests {
         }
     }
 
+    /**
+     * Test update a valid Character
+     * @throws Exception
+     */
     @Test
     public void case08() throws Exception {
         CharacterDTO characterDTO = new CharacterDTO();
@@ -101,6 +135,10 @@ public class CharacterServiceTests {
         Assert.assertNotNull(characterService.update(1L, characterDTO));
     }
 
+    /**
+     * Test update a valid Character
+     * @throws Exception
+     */
     @Test
     public void case09() throws Exception {
         CharacterDTO characterDTO = new CharacterDTO();
@@ -113,6 +151,10 @@ public class CharacterServiceTests {
         Assert.assertTrue(characterService.update(1L, characterDTO) instanceof Character);
     }
 
+    /**
+     * Test update an invalid Character
+     * @throws Exception
+     */
     @Test
     public void case10() throws Exception {
         try {
@@ -128,6 +170,10 @@ public class CharacterServiceTests {
         }
     }
 
+    /**
+     * Test update an invalid Character
+     * @throws Exception
+     */
     @Test
     public void case11() throws Exception {
         try {
@@ -139,6 +185,10 @@ public class CharacterServiceTests {
         }
     }
 
+    /**
+     * Test Filter house from PotterAPI by a house name
+     * @throws Exception
+     */
     @Test
     public void case12() throws Exception {
         String mockHouseId = "5a05e2b252f721a3cf2ea33f";
@@ -146,6 +196,10 @@ public class CharacterServiceTests {
         Assert.assertEquals(mockHouseId, characterService.getHouseId(MockHouseName));
     }
 
+    /**
+     * Test Filter house from PotterAPI by an invalid house name
+     * @throws Exception
+     */
     @Test
     public void case13() throws Exception {
         try {

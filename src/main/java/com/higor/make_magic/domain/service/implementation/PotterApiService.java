@@ -13,6 +13,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -24,7 +25,10 @@ public class PotterApiService implements PotterApiServiceDefinition {
     private RestClientDefinition restClient;
 
     public PotterApiService() {
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+
+        OkHttpClient.Builder httpClient = new OkHttpClient().newBuilder()
+                .addInterceptor(new RequestInterceptor());
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -34,17 +38,19 @@ public class PotterApiService implements PotterApiServiceDefinition {
         this.restClient = retrofit.create(RestClientDefinition.class);
     }
 
+    /**
+     * Perform a Http Get call to PotterAPI
+     * @return A List of HouseDTO from PotterAPI
+     */
     @Override
     public List<HouseDTO> getAllHouses() {
         try {
             Call<List<HouseDTO>> callSync = this.restClient.getAllHouses(KEY);
             Response<List<HouseDTO>> response = callSync.execute();
-            if (response.raw().code() != HttpStatus.OK.value()){
-                throw new ThirdPartyApiException("Please pass the correct api key");
-            }
+
             return response.body();
-        }catch(Exception ex){
-            throw new ThirdPartyApiException("Please pass the correct api key");
+        }catch(IOException ex){
+            throw new ThirdPartyApiException("An error occurred while trying to process your request");
         }
     }
 }

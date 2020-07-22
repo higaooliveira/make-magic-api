@@ -15,6 +15,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurationSupport {
 
+    /**
+     * This methods returns a Swagger API Object
+     * @return Docket
+     */
     @Bean
     public Docket makeMagicApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -25,6 +29,10 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     }
 
+    /**
+     * This method put the meta data in generated json by swagger
+     * @return
+     */
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
                 .title("Make Magic REST API")
@@ -33,6 +41,10 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 .build();
     }
 
+    /**
+     * This method registry a endpoint to see swagger ui.
+     * @param registry
+     */
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")

@@ -8,6 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class CharacterDTOTest {
 
+    /**
+     * Test conversion class from CharacterDTO to Character
+     * @throws Exception
+     */
     @Test
     public void case01 () throws Exception{
         CharacterDTO characterDTO = new CharacterDTO();

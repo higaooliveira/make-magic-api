@@ -3,13 +3,13 @@ package com.higor.make_magic.resource;
 import com.higor.make_magic.domain.dto.CharacterDTO;
 import com.higor.make_magic.domain.entity.Character;
 import com.higor.make_magic.domain.service.definition.CharacterServiceDefinition;
-import com.higor.make_magic.util.HateoasHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -21,12 +21,24 @@ public class CharacterResource {
     @Autowired
     private CharacterServiceDefinition characterService;
 
+    /**
+     *
+     * @param house The house hash code to filter all characters by house (Can be null)
+     * @param patronus The patronus name to filter all characters by patronus (Can be null)
+     * @return List of Characters
+     */
     @ApiOperation(value = "List All registered characters")
     @GetMapping(value = "/characters", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Character>> getAll(@RequestParam(required = false) String house, @RequestParam(required = false) String patronus){
         return ResponseEntity.ok(this.characterService.getAll(house, patronus));
     }
 
+
+    /**
+     *
+     * @param id The character id to get a character by id
+     * @return Character
+     */
     @ApiOperation(value = "Get a character by Id")
     @GetMapping(value = "/characters/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Character> getById(@PathVariable Long id){
@@ -35,14 +47,31 @@ public class CharacterResource {
         return ResponseEntity.ok(character);
     }
 
+    /**
+     *
+     * @param characterDTO Data transfer object to create a Character
+     * @return Created Character
+     */
     @ApiOperation(value = "Create a character")
     @PostMapping(value = "/characters", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Character> create(@RequestBody CharacterDTO characterDTO){
         Character character = this.characterService.create(characterDTO);
 
-        return ResponseEntity.created(HateoasHelper.buildUrlToGetRequest(character.getId())).body(character);
+        return ResponseEntity
+                .created(ServletUriComponentsBuilder
+                                .fromCurrentRequest()
+                                .path("/{id}")
+                                .buildAndExpand(character.getId())
+                                .toUri())
+                .body(character);
     }
 
+    /**
+     *
+     * @param id The character id to update
+     * @param characterDTO Data transfer object to update a Character
+     * @return Updated Character
+     */
     @ApiOperation(value = "Update a character")
     @PutMapping(value = "/characters/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Character> update(@PathVariable Long id, @RequestBody CharacterDTO characterDTO){
@@ -50,6 +79,11 @@ public class CharacterResource {
         return ResponseEntity.ok(character);
     }
 
+    /**
+     *
+     * @param id to delete
+     * @return No content
+     */
     @ApiOperation(value = "Delete a character")
     @DeleteMapping(value = "/characters/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> delete(@PathVariable Long id){

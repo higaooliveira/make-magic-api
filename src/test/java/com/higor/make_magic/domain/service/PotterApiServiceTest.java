@@ -12,6 +12,9 @@ public class PotterApiServiceTest {
     @Autowired
     private PotterApiService potterApiService;
 
+    /**
+     * Performs test in method that call Third Party API
+     */
     @Test
     public void case01(){
         Assert.assertNotNull(potterApiService.getAllHouses());

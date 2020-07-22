@@ -31,6 +31,9 @@ public class CharacterDTO {
 
     public void setPatronus(String patronus) {this.patronus = patronus;}
 
+    /**
+     * This method converts DTO to Entity
+     */
     public Character toEntity(){
         return new Character(
                 this.name,
