@@ -34,7 +34,7 @@ public class CharacterServiceTests {
      */
     @Test
     public void case01() throws Exception {
-        Assert.assertNotNull(characterService.getAll("", ""));
+        Assert.assertNotNull(characterService.getAll(""));
     }
 
     /**
@@ -43,7 +43,7 @@ public class CharacterServiceTests {
      */
     @Test()
     public void case02() throws Exception {
-        Assert.assertNotNull(characterService.getAll("5a05e2b252f721a3cf2ea33f", "stag"));
+        Assert.assertNotNull(characterService.getAll("5a05e2b252f721a3cf2ea33f"));
     }
 
     /**
