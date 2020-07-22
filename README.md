@@ -3,7 +3,7 @@
 Make Magic is a REST API for managing character registrations in the Harry Potter saga, a basic CRUD. This project is available on heroku through the endpoints:
 - [https://make-magic-api.herokuapp.com/swagger-ui.html](https://make-magic-api.herokuapp.com/swagger-ui.html) for Swagger documentation
 - [https://make-magic-api.herokuapp.com/api/characters](https://make-magic-api.herokuapp.com/api/characters) for registered characters list or register new character
-    - This endpoint accept two query string parameters to filter **?house={house hash code}** and **patronus={patronus name}**
+    - This endpoint accept a query string parameters to filter **?house={house hash code}** 
 - [https://make-magic-api.herokuapp.com/api/characters/{id}](https://make-magic-api.herokuapp.com/api/characters/{id}) for get, update or delete a specific character
 
 # P.S

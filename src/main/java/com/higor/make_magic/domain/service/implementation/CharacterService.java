@@ -31,13 +31,12 @@ public class CharacterService implements CharacterServiceDefinition {
     /**
      *
      * @param house The house hash code to filter all characters by house (Can be null)
-     * @param patronus The patronus name to filter all characters by patronus (Can be null)
      * @variable specification is an object that represents the filter in query
      * @return List of Characters
      */
     @Override
-    public List<Character> getAll(String house, String patronus) {
-        Character filter  = new Character(house, patronus);
+    public List<Character> getAll(String house) {
+        Character filter  = new Character(house, null);
         Specification<Character> specification = new CharacterSpecification(filter);
         return this.repository.findAll(specification);
     }

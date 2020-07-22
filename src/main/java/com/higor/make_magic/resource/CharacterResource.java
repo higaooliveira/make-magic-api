@@ -24,13 +24,12 @@ public class CharacterResource {
     /**
      *
      * @param house The house hash code to filter all characters by house (Can be null)
-     * @param patronus The patronus name to filter all characters by patronus (Can be null)
      * @return List of Characters
      */
     @ApiOperation(value = "List All registered characters")
     @GetMapping(value = "/characters", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Character>> getAll(@RequestParam(required = false) String house, @RequestParam(required = false) String patronus){
-        return ResponseEntity.ok(this.characterService.getAll(house, patronus));
+    public ResponseEntity<List<Character>> getAll(@RequestParam(required = false) String house){
+        return ResponseEntity.ok(this.characterService.getAll(house));
     }
 
 

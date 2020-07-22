@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CharacterServiceDefinition {
 
-    public List<Character> getAll(String house, String patronus);
+    public List<Character> getAll(String house);
 
     public Character getById(Long id);
 

@@ -28,10 +28,6 @@ public class CharacterSpecification implements Specification<Character> {
             predicate.getExpressions().add(criteriaBuilder.equal(root.get("house"), this.filter.getHouse()));
         }
 
-        if (this.filter.getPatronus() != null && !this.filter.getHouse().isEmpty()){
-            predicate.getExpressions().add(criteriaBuilder.equal(root.get("patronus"), this.filter.getPatronus()));
-        }
-
         return predicate;
     }
 }
