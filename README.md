@@ -12,8 +12,8 @@ Being hosted in heroku, the first call may take a while. Heroku works with a dem
 If you prefer to run locally, follow the steps below
 
 # How to run
-  - Open the application.properties file at /src/main/resources
-  - Change all wild words for your database credentials (${DATABASE_URL}) for example
+  - Open the **application.properties** file at /src/main/resources
+  - Change all wild words for your database credentials (**${DATABASE_URL}**) for example
   - Run the command to build container `docker build --build-arg JAR_FILE=build/libs/make-magic-docker-0.1.0.jar -t make-magic-api .`
   - Run the command to run container `docker run -p 8080:8080 make-magic-api`
   
@@ -29,7 +29,7 @@ If you prefer to run locally, follow the steps below
  - Domain Service layer: core of validations and business logic before persist on database.
  - Domain Model layer: responsible for describing all application models that will later be mapped to the database.
  - Infrastructure layer: can be divided in one more layer
-    - Data layer: responsible persistence with the database, using SqlAlchemy as ORM
+    - Data layer: responsible persistence with the database, using Hibernate as ORM
  - Tests layer: responsible for testing the application services and domain services.
 
 ![Architecture](https://miro.medium.com/max/732/1*P4zm6LF9l0nRmyN2iqjgHQ.png)
